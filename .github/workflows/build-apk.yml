@@ -16,14 +16,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Extract Flutter project
-        run: |
-          unzip -q nkh_football_flutter_source.zip -d app
+      - name: Extract project
+        run: unzip -q nkh_football_flutter_source.zip -d app
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+
+      - name: Generate Android platform
+        working-directory: app/nkh_football_flutter_source
+        run: flutter create --platforms=android .
 
       - name: Build APK
         working-directory: app/nkh_football_flutter_source
